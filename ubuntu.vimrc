@@ -1,4 +1,5 @@
 set guioptions-=T " Remove toolbar
+set guioptions-=m " Remove menu
 set nocompatible
 set number
 set ruler
