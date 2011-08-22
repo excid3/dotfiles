@@ -42,5 +42,5 @@ export PS1="\`if [ \$? = 0 ];
       echo -e '$LIGHT_RED\u@\h $LIGHT_BLUE\w $YELLOW$(parse_git_branch)$ $DEFAULT_COLOR';
     fi; \`"
 
-
+export CLICOLOR=1
 #export PS1='\u@\h \w $(parse_git_branch)$ '
