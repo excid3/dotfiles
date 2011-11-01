@@ -16,3 +16,6 @@ au InsertLeave * hi statusline guibg=green
 
 " default the statusline to green when entering Vim
 hi statusline guibg=green
+
+" strip trailing whitespace on save
+autocmd BufWritePre * :%s/\s\+$//e
