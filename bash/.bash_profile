@@ -43,3 +43,4 @@ else
 fi
 
 alias rake='bundle exec rake'
+export PATH=/usr/local/bin:$PATH
