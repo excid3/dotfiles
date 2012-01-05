@@ -41,5 +41,3 @@ if [[ $? = 0 ]]; then
 else
   export PS1='\[\033[0;31m\]\u@\h \[\033[1;34m\]\w \[\033[1;33m\]$(parse_git_branch)$ \[\033[1;00m\]'
 fi
-
-alias rake='bundle exec rake'
