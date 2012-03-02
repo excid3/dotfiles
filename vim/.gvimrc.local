@@ -19,3 +19,8 @@ hi statusline guibg=green
 
 " strip trailing whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
+
+if has("gui_macvim") && has("gui_running")
+  " Command-Shift-F on OSX
+  nmap <D-S-F> :Ack<space>
+endif
