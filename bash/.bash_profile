@@ -1,4 +1,7 @@
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
+PATH=/usr/local/bin:$PATH
+CLICOLOR=1
+alias ls="ls -GfHp"
 
 BLACK="\[\033[0;30m\]"
 DARK_GRAY="\[\033[1;30m\]"
@@ -35,8 +38,6 @@ function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)] /"
 }
 
-export CLICOLOR=1
-alias ls="ls -GfHp"
 
 NONE="\[\033[0m\]"    # unsets color to term's fg color
 
@@ -70,5 +71,6 @@ BGM="\[\033[45m\]"
 BGC="\[\033[46m\]"
 BGW="\[\033[47m\]"
 
-PS1='\n`if [[ \$? = "0" ]]; then echo "\[\033[0;32m\]"; else echo "\[\033[0;31m\]"; fi`\u@\h \[\033[1;34m\]\w \n\[\033[1;33m\]$(parse_git_branch)$ \[\033[1;00m\]'
-PATH=/usr/local/bin:$PATH
+#PS1='\n`if [[ \$? = "0" ]]; then echo "\[\033[0;32m\]"; else echo "\[\033[0;31m\]"; fi`\u@\h \[\033[1;34m\]\w \n\[\033[1;33m\]$(parse_git_branch)$ \[\033[1;00m\]'
+
+PS1="$NONE\n[$G\u@\h $B\w$NONE]\n$Y$ $NONE"
