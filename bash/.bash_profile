@@ -32,7 +32,7 @@ function parse_git_dirty {
   echo "$(parse_git_added)$(parse_git_modified)$(parse_git_deleted)"
 }
 function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)]/"
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/[\1$(parse_git_dirty)] /"
 }
 
 export CLICOLOR=1
