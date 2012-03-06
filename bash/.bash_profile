@@ -1,7 +1,7 @@
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" # Load RVM function
 PATH=/usr/local/bin:$PATH
 CLICOLOR=1
-alias ls="ls -GfHp"
+alias ls="ls -GFH"
 
 NONE="\[\033[0m\]"    # unsets color to term's fg color
 
