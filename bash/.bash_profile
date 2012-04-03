@@ -2,6 +2,7 @@
 PATH=/usr/local/bin:$PATH
 CLICOLOR=1
 alias ls="ls -GFH"
+alias be="bundle exec"
 
 NONE="\[\033[0m\]"    # unsets color to term's fg color
 
