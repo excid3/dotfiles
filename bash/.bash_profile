@@ -3,6 +3,7 @@ PATH=/usr/local/bin:$PATH
 CLICOLOR=1
 alias ls="ls -GFH"
 alias be="bundle exec"
+alias dbreset="rake db:drop && rake db:create && rake db:migrate && rake db:seed"
 
 NONE="\[\033[0m\]"    # unsets color to term's fg color
 
@@ -54,7 +55,8 @@ function parse_git_branch {
 }
 
 function ruby_ver {
-  ruby -e 'print RUBY_VERSION'
+  rvm-prompt
+  #ruby -e 'print RUBY_VERSION'
 }
 
 function color_git {
