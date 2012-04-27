@@ -3,6 +3,7 @@ PATH=/usr/local/bin:$PATH
 CLICOLOR=1
 alias ls="ls -GFH"
 alias be="bundle exec"
+alias cap="bundle exec cap"
 alias dbreset="rake db:drop && rake db:create && rake db:migrate && rake db:seed"
 
 NONE="\[\033[0m\]"    # unsets color to term's fg color
