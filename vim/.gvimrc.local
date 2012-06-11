@@ -1,5 +1,6 @@
 color molokai
 set guifont=Monaco:h11.00
+set wildmenu
 
 function! InsertStatuslineColor(mode)
   if a:mode == 'i'
