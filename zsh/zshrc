@@ -29,10 +29,12 @@ ZSH_THEME="excid3"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx ruby rails bundler brew rails3 rake cap)
+plugins=(git osx ruby rails bundler brew rake cap)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
 export PATH=/usr/local/bin:/Users/chris/.rvm/gems/ruby-1.9.3-p125/bin:/Users/chris/.rvm/gems/ruby-1.9.3-p125@global/bin:/Users/chris/.rvm/rubies/ruby-1.9.3-p125/bin:/Users/chris/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init - zsh)"
