@@ -38,3 +38,5 @@ export PATH=/usr/local/bin:/Users/chris/.rvm/gems/ruby-1.9.3-p125/bin:/Users/chr
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init - zsh)"
+
+export ANDROID_HOME=/usr/local/opt/android-sdk
