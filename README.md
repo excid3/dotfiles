@@ -42,7 +42,8 @@ Just [Chris Oliver's](https://twitter.com/excid3) dotfiles. You can copy these i
     ln -s ~/code/dotfiles/zsh/themes/excid3.zsh-theme ~/.oh-my-zsh/themes/excid3.zsh-theme
     ln -s ~/code/dotfiles/zsh/zshrc ~/.zshrc
     ln -s ~/code/dotfiles/vim/gvimrc.after ~/.gvimrc.after
-    ```
+    ln -s ~/code/dotfiles/psqlrc ~/.psqlrc
+   ```
 
 7. Open iTerm and import color scheme from iterm folder
 
