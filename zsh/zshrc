@@ -29,7 +29,7 @@ ZSH_THEME="excid3"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git osx ruby rails bundler brew rake cap)
+plugins=(git osx brew)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -37,7 +37,16 @@ source $ZSH/oh-my-zsh.sh
 export PATH=/usr/local/bin:/Users/chris/.rvm/gems/ruby-1.9.3-p125/bin:/Users/chris/.rvm/gems/ruby-1.9.3-p125@global/bin:/Users/chris/.rvm/rubies/ruby-1.9.3-p125/bin:/Users/chris/.rvm/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init - zsh)"
+#eval "$(rbenv init - zsh)"
 
 export ANDROID_HOME=/usr/local/opt/android-sdk
 export EDITOR="mvim -f"
+
+# ZSH iterm word jump
+bindkey "[D" backward-word
+bindkey "[C" forward-word
+bindkey "^[a" beginning-of-line
+bindkey "^[e" end-of-line
+
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash

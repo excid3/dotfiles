@@ -25,7 +25,7 @@ function virtualenv_info {
  }
 
 function rbenv_ps1 {
-  rbenv_ruby_version=`rbenv version | sed -e 's/ .*//'`
+  rbenv_ruby_version=`asdf current ruby | sed -e 's/ .*//'`
   echo $rbenv_ruby_version
 }
 
