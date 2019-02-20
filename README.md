@@ -47,6 +47,26 @@ Just [Chris Oliver's](https://twitter.com/excid3) dotfiles. You can copy these i
 
 7. Open iTerm and import color scheme from iterm folder
 
+8. diff-so-fancy
+
+    ```
+    brew install diff-so-fancy
+    
+    git config --global color.ui true
+
+    git config --global color.diff-highlight.oldNormal    "red bold"
+    git config --global color.diff-highlight.oldHighlight "red bold 52"
+    git config --global color.diff-highlight.newNormal    "green bold"
+    git config --global color.diff-highlight.newHighlight "green bold 22"
+
+    git config --global color.diff.meta       "yellow"
+    git config --global color.diff.frag       "magenta bold"
+    git config --global color.diff.commit     "yellow bold"
+    git config --global color.diff.old        "red bold"
+    git config --global color.diff.new        "green bold"
+    git config --global color.diff.whitespace "red reverse"
+    ```
+    
 # Other tips
 
 Here are some other useful commands I like to use:
