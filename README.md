@@ -41,9 +41,12 @@ Just [Chris Oliver's](https://twitter.com/excid3) dotfiles. You can copy these i
     ```
     ln -s ~/code/dotfiles/zsh/themes/excid3.zsh-theme ~/.oh-my-zsh/themes/excid3.zsh-theme
     ln -s ~/code/dotfiles/zsh/zshrc ~/.zshrc
-    ln -s ~/code/dotfiles/vim/gvimrc.after ~/.gvimrc.after
+    ln -s ~/code/dotfiles/vim/vimrc ~/.vimrc
     ln -s ~/code/dotfiles/psqlrc ~/.psqlrc
-   ```
+    ln -s ~/code/dotfiles/gemrc ~/.gemrc
+
+    vim +PluginInstall +qall
+    ```
 
 7. Open iTerm and import color scheme from iterm folder
 
@@ -51,7 +54,6 @@ Just [Chris Oliver's](https://twitter.com/excid3) dotfiles. You can copy these i
 
     ```
     brew install diff-so-fancy
-    
     git config --global color.ui true
 
     git config --global color.diff-highlight.oldNormal    "red bold"
@@ -66,7 +68,7 @@ Just [Chris Oliver's](https://twitter.com/excid3) dotfiles. You can copy these i
     git config --global color.diff.new        "green bold"
     git config --global color.diff.whitespace "red reverse"
     ```
-    
+
 # Other tips
 
 Here are some other useful commands I like to use:
