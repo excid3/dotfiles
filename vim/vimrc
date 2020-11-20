@@ -134,3 +134,6 @@ set formatoptions-=t " do not automatically wrap text when typing
 " Toggle nerdcommenter with command+/
 nmap <C-_>   <Plug>NERDCommenterToggle
 vmap <C-_>   <Plug>NERDCommenterToggle<CR>gv
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
