@@ -25,7 +25,7 @@ function virtualenv_info {
  }
 
 function ruby_ps1 {
-  ruby_version=`asdf current ruby | awk '{print $1}'`
+  ruby_version=`asdf current ruby | awk '{print $2}'`
   echo $ruby_version
 }
 
