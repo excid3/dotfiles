@@ -1,81 +1,63 @@
 # My Dotfiles
 
-Just [Chris Oliver's](https://twitter.com/excid3) dotfiles. You can copy these in and everything is ready for the races.
+[Chris Oliver's](https://twitter.com/excid3) dotfiles.
+
+Copy these into your terminal and you'll be off to the races.
 
 ## Installation
 
-1. Clone this repo
+* Clone this repo
 
-    ```
-    mkdir -p ~/code && cd ~/code && git clone https://github.com/excid3/dotfiles.git
-    ```
+```bash
+mkdir -p ~/code && cd ~/code && git clone https://github.com/excid3/dotfiles.git
+```
 
-2. Install Homebrew
+* Install Homebrew and packages like Neovim, Mise, etc
 
-    ```
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    ```
+```bash
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew bundle
+```
 
-3. Install MacVim, rbenv, ruby-build, and more
+* Install Oh-My-ZSH
 
-    ```
-    brew install macvim rbenv ruby-build postgresql elasticsearch redis zsh
-    brew install Caskroom/cask/iterm2
-    brew install Caskroom/cask/google-chrome
-    ```
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+```
 
-4. Install Oh-My-ZSH
+* Symlink configs
 
-    ```
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    ```
+```bash
+ln -s ~/code/dotfiles/zsh/themes/excid3.zsh-theme ~/.oh-my-zsh/themes/excid3.zsh-theme
+ln -s ~/code/dotfiles/zsh/zshrc ~/.zshrc
+ln -s ~/code/dotfiles/vim/vimrc ~/.vimrc
+ln -s ~/code/dotfiles/psqlrc ~/.psqlrc
+ln -s ~/code/dotfiles/gemrc ~/.gemrc
 
-5. Install Janus for Vim
+mkdir -p ~/.config/nvim
+ln -s ~/code/dotfiles/vim/vimrc ~/.config/nvim/init.vim
 
-    ```
-    curl -L https://bit.ly/janus-bootstrap | bash
-    ```
+# Install Vim plugins
+vim +PlugInstall +qall
+```
 
-6. Symlink configs
+* Open iTerm and import color scheme from iterm folder
 
-    ```
-    ln -s ~/code/dotfiles/zsh/themes/excid3.zsh-theme ~/.oh-my-zsh/themes/excid3.zsh-theme
-    ln -s ~/code/dotfiles/zsh/zshrc ~/.zshrc
-    ln -s ~/code/dotfiles/vim/vimrc ~/.vimrc
-    ln -s ~/code/dotfiles/psqlrc ~/.psqlrc
-    ln -s ~/code/dotfiles/gemrc ~/.gemrc
+* Configure git to use [delta](https://github.com/dandavison/delta) and add lg alias
 
-    vim +PluginInstall +qall
-    ```
+```bash
+git config --global color.ui true
+git config --global core.pager delta
+git config --global interactive.diffFilter 'delta --color-only'
+git config --global delta.navigate true
+git config --global delta.dark true  # or `delta.light true`, or omit for auto-detection
+git config --global merge.conflictStyle zdiff3
 
-7. Open iTerm and import color scheme from iterm folder
-
-8. diff-so-fancy
-
-    ```
-    brew install diff-so-fancy
-    git config --global color.ui true
-
-    git config --global color.diff-highlight.oldNormal    "red bold"
-    git config --global color.diff-highlight.oldHighlight "red bold 52"
-    git config --global color.diff-highlight.newNormal    "green bold"
-    git config --global color.diff-highlight.newHighlight "green bold 22"
-
-    git config --global color.diff.meta       "yellow"
-    git config --global color.diff.frag       "magenta bold"
-    git config --global color.diff.commit     "yellow bold"
-    git config --global color.diff.old        "red bold"
-    git config --global color.diff.new        "green bold"
-    git config --global color.diff.whitespace "red reverse"
-    ```
+# git lg alias
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
+```
 
 # Other tips
-
-Here are some other useful commands I like to use:
-
-#### Pretty ```git lg```
-
-	git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 
 #### Import GPG Keys
 
