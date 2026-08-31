@@ -37,6 +37,9 @@ ln -s ~/code/dotfiles/gemrc ~/.gemrc
 mkdir -p ~/.config/nvim
 ln -s ~/code/dotfiles/vim/vimrc ~/.config/nvim/init.vim
 
+mkdir -p ~/.config/openlogi
+cp ~/code/dotfiles/openlogi/config.toml ~/.config/openlogi/config.toml
+
 # Install Vim plugins
 vim +PlugInstall +qall
 ```
