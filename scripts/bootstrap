@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# Sets up a machine from this dotfiles repo. Safe to re-run; existing files
+# are backed up to *.backup before being replaced with symlinks.
+set -euo pipefail
+
+DOTFILES="$(cd "$(dirname "$0")/.." && pwd)"
+
+# Homebrew and packages
+if ! command -v brew >/dev/null; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+brew bundle --file "$DOTFILES/Brewfile"
+
+# Oh-My-ZSH
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+  RUNZSH=no KEEP_ZSHRC=yes sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
+
+link() {
+  local src="$1" dest="$2"
+  if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$src" ]; then
+    echo "ok: $dest"
+    return
+  fi
+  if [ -e "$dest" ]; then
+    mv "$dest" "$dest.backup"
+    echo "backed up: $dest -> $dest.backup"
+  fi
+  ln -s "$src" "$dest"
+  echo "linked: $dest -> $src"
+}
+
+link "$DOTFILES/zsh/themes/excid3.zsh-theme" "$HOME/.oh-my-zsh/themes/excid3.zsh-theme"
+link "$DOTFILES/zsh/zshrc" "$HOME/.zshrc"
+link "$DOTFILES/psqlrc" "$HOME/.psqlrc"
+link "$DOTFILES/gemrc" "$HOME/.gemrc"
+
+mkdir -p "$HOME/.config/nvim"
+link "$DOTFILES/nvim/init.lua" "$HOME/.config/nvim/init.lua"
+
+# Copied instead of symlinked: these apps rewrite their config files in place,
+# which would replace a symlink. Only seeded when missing so live settings win.
+mkdir -p "$HOME/.config/openlogi" "$HOME/.config/mise"
+[ -f "$HOME/.config/openlogi/config.toml" ] || cp "$DOTFILES/openlogi/config.toml" "$HOME/.config/openlogi/config.toml"
+[ -f "$HOME/.config/mise/config.toml" ] || cp "$DOTFILES/mise/config.toml" "$HOME/.config/mise/config.toml"
+mise install --yes
+
+# Git: delta pager and lg alias
+git config --global color.ui true
+git config --global core.pager delta
+git config --global interactive.diffFilter 'delta --color-only'
+git config --global delta.navigate true
+git config --global delta.dark true
+git config --global merge.conflictStyle zdiff3
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
+
+echo "Bootstrap complete. Open a new shell to pick up the zsh config."

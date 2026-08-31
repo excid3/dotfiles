@@ -1,7 +1,0 @@
-pushd ~/.vim
-
-rake
-brew update
-brew upgrade
-
-popd

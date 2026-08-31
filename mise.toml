@@ -1,0 +1,7 @@
+[tasks.bootstrap]
+description = "Install Homebrew packages, oh-my-zsh, mise tools, and symlink configs"
+run = "{{config_root}}/scripts/bootstrap"
+
+[tasks.update]
+description = "Update Homebrew packages"
+run = ["brew update", "brew upgrade"]
