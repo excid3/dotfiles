@@ -3,6 +3,7 @@ brew "mise"
 brew "postgresql"
 brew "redis"
 brew "git-delta"
+brew "overmind"
 
 cask "iterm2"
 cask "openlogi"
