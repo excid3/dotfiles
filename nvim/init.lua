@@ -122,7 +122,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Fugitive
 vim.keymap.set("n", "<leader>gbl", ":Git blame<cr>", { desc = "Git blame" })
-vim.keymap.set("n", "<leader>ghp", ":!/opt/dev/bin/dev open pr &<cr><cr>", { desc = "Github PR" })
+vim.keymap.set("n", "<leader>ghp", ":!gh pr view --web<cr><cr>", { desc = "Github PR" })
 vim.keymap.set("n", "<leader>gs", ":Git<cr>", { desc = "Git status" })
 vim.keymap.set({ "n", "v" }, "<leader>gbr", ":GBrowse<cr>", { desc = "Git browse" })
 
