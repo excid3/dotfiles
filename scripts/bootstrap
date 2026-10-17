@@ -5,12 +5,39 @@ set -euo pipefail
 
 DOTFILES="$(cd "$(dirname "$0")/.." && pwd)"
 
-# Homebrew and packages
-if ! command -v brew >/dev/null; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-brew bundle --file "$DOTFILES/Brewfile"
+# System packages. CLI tools come from mise; this is only for what mise can't
+# manage: zsh, background services (postgres, redis), GUI apps, fonts, and the
+# libraries Ruby needs to compile.
+case "$(uname -s)" in
+  Darwin)
+    if ! command -v brew >/dev/null; then
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
+    brew bundle --file "$DOTFILES/Brewfile"
+    ;;
+  Linux)
+    if command -v apt-get >/dev/null; then
+      sudo apt-get update
+      sudo apt-get install -y zsh git curl unzip fontconfig postgresql redis-server \
+        build-essential libssl-dev libyaml-dev zlib1g-dev libffi-dev libpq-dev
+      sudo systemctl enable --now postgresql redis-server
+    else
+      echo "Unsupported Linux distro: install zsh, postgresql, redis, and Ruby build deps manually." >&2
+    fi
+    if [ "$(basename "$SHELL")" != "zsh" ]; then
+      chsh -s "$(command -v zsh)"
+    fi
+    # Same font the Brewfile cask installs on macOS
+    if ! fc-list | grep -qi "FiraCode Nerd Font"; then
+      mkdir -p "$HOME/.local/share/fonts"
+      curl -fsSL -o /tmp/FiraCode.zip https://github.com/ryanoasis/nerd-fonts/releases/latest/download/FiraCode.zip
+      unzip -oq /tmp/FiraCode.zip -d "$HOME/.local/share/fonts/FiraCodeNerdFont"
+      rm /tmp/FiraCode.zip
+      fc-cache -f
+    fi
+    ;;
+esac
 
 # Oh-My-ZSH
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
@@ -41,9 +68,14 @@ link "$DOTFILES/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 
 # Copied instead of symlinked: these apps rewrite their config files in place,
 # which would replace a symlink. Only seeded when missing so live settings win.
-mkdir -p "$HOME/.config/openlogi" "$HOME/.config/mise"
-[ -f "$HOME/.config/openlogi/config.toml" ] || cp "$DOTFILES/openlogi/config.toml" "$HOME/.config/openlogi/config.toml"
+mkdir -p "$HOME/.config/mise"
 [ -f "$HOME/.config/mise/config.toml" ] || cp "$DOTFILES/mise/config.toml" "$HOME/.config/mise/config.toml"
+if [ "$(uname -s)" = "Darwin" ]; then
+  mkdir -p "$HOME/.config/openlogi"
+  [ -f "$HOME/.config/openlogi/config.toml" ] || cp "$DOTFILES/openlogi/config.toml" "$HOME/.config/openlogi/config.toml"
+fi
+
+# Languages and CLI tools (node, ruby, neovim, tree-sitter, delta, overmind, gh, jq)
 mise install --yes
 
 # Git: delta pager and lg alias

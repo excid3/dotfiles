@@ -103,15 +103,22 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# Mise (standalone install first, Homebrew install as fallback)
+# Mise (installed via https://mise.run; falls back to whatever is on PATH)
 if [ -x ~/.local/bin/mise ]; then
   eval "$(~/.local/bin/mise activate zsh)"
 elif command -v mise >/dev/null; then
   eval "$(mise activate zsh)"
 fi
 
-# brew install libpq && gem install pg
-export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
+# macOS: brew install libpq && gem install pg (Linux finds libpq-dev via system pkg-config)
+if [ -d /opt/homebrew/opt/libpq/lib/pkgconfig ]; then
+  export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
+fi
 
-# Tell Ruby where SSL certs live
-export SSL_CERT_FILE=/etc/ssl/cert.pem
+# Tell Ruby where SSL certs live (macOS, then Debian/Ubuntu, then Fedora)
+for f in /etc/ssl/cert.pem /etc/ssl/certs/ca-certificates.crt /etc/pki/tls/certs/ca-bundle.crt; do
+  if [ -f "$f" ]; then
+    export SSL_CERT_FILE="$f"
+    break
+  fi
+done

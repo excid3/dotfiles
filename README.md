@@ -26,15 +26,19 @@ mise trust
 mise run bootstrap
 ```
 
-This installs Homebrew and the Brewfile packages, installs Oh-My-ZSH, symlinks
-the zsh/psql/gem/nvim configs into place (existing files are backed up to
-`*.backup`), seeds the openlogi and mise configs, installs mise tools, and
-configures git to use [delta](https://github.com/dandavison/delta) with the
+On macOS this installs Homebrew (only for postgres, redis, and the casks in the
+Brewfile); on Debian/Ubuntu it uses apt for zsh, postgres, redis, and the Ruby
+build dependencies. It then installs Oh-My-ZSH, symlinks the zsh/psql/gem/nvim configs into
+place (existing files are backed up to `*.backup`), seeds the openlogi and mise
+configs, installs the mise tools from `mise/config.toml` (node, ruby, neovim,
+tree-sitter, delta, overmind, gh, jq), and configures git to use [delta](https://github.com/dandavison/delta) with the
 `git lg` alias. It's safe to re-run.
 
-* Open iTerm and import color scheme from iterm folder
+* macOS: open iTerm and import the color scheme from the iterm folder
 
 ## Updating packages
+
+Upgrades mise itself, the mise tools, and the Homebrew packages:
 
 ```bash
 mise run update
