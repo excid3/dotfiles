@@ -1,0 +1,23 @@
+# Ghostty config. Run `ghostty +show-config --default --docs` for all options.
+
+# Theme tuned for the Pro Display XDR
+theme = Monokai Pro Spectrum
+window-colorspace = display-p3
+
+# Quick terminal from anywhere with Cmd+`
+keybind = global:cmd+grave_accent=toggle_quick_terminal
+
+macos-option-as-alt = true
+mouse-hide-while-typing = true
+window-save-state = always
+
+# Install Ghostty's terminfo on remote hosts so ssh sessions work properly
+shell-integration-features = ssh-terminfo,ssh-env
+
+window-padding-x = 12
+window-padding-y = 8
+window-padding-balance = true
+macos-titlebar-style = tabs
+unfocused-split-opacity = 0.85
+cursor-style = bar
+cursor-style-blink = false

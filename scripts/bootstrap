@@ -66,6 +66,16 @@ link "$DOTFILES/gemrc" "$HOME/.gemrc"
 mkdir -p "$HOME/.config/nvim"
 link "$DOTFILES/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 
+# Ghostty loads the Application Support path last on macOS, so it overrides
+# ~/.config/ghostty there
+if [ "$(uname -s)" = "Darwin" ]; then
+  ghostty_dir="$HOME/Library/Application Support/com.mitchellh.ghostty"
+else
+  ghostty_dir="$HOME/.config/ghostty"
+fi
+mkdir -p "$ghostty_dir"
+link "$DOTFILES/ghostty/config" "$ghostty_dir/config"
+
 # Copied instead of symlinked: these apps rewrite their config files in place,
 # which would replace a symlink. Only seeded when missing so live settings win.
 mkdir -p "$HOME/.config/mise"

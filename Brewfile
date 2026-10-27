@@ -4,5 +4,6 @@ brew "postgresql"
 brew "redis"
 
 cask "iterm2"
+cask "ghostty"
 cask "openlogi"
 cask "font-fira-code-nerd-font"
