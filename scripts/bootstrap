@@ -85,7 +85,7 @@ if [ "$(uname -s)" = "Darwin" ]; then
   [ -f "$HOME/.config/openlogi/config.toml" ] || cp "$DOTFILES/openlogi/config.toml" "$HOME/.config/openlogi/config.toml"
 fi
 
-# Languages and CLI tools (node, ruby, neovim, tree-sitter, delta, overmind, gh, jq)
+# Languages and CLI tools (node, ruby, neovim, tree-sitter, delta, overmind, tmux, gh, jq)
 mise install --yes
 
 # Git: delta pager and lg alias
