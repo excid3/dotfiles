@@ -1,0 +1,38 @@
+# Mirrors the environment from ~/.zshenv, ~/.zprofile and ~/.zshrc so bash
+# (used by Claude Code) sees the same tools on PATH.
+
+# Rust
+[ -f "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+
+# Docker Desktop
+export PATH="$PATH:$HOME/.docker/bin"
+
+# Homebrew
+[ -x /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Preferred editor for local and remote sessions
+if [ -n "$SSH_CONNECTION" ]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
+
+# Mise (installed via https://mise.run; falls back to whatever is on PATH)
+if [ -x ~/.local/bin/mise ]; then
+  eval "$(~/.local/bin/mise activate bash)"
+elif command -v mise >/dev/null; then
+  eval "$(mise activate bash)"
+fi
+
+# macOS: brew install libpq && gem install pg (Linux finds libpq-dev via system pkg-config)
+if [ -d /opt/homebrew/opt/libpq/lib/pkgconfig ]; then
+  export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
+fi
+
+# Tell Ruby where SSL certs live (macOS, then Debian/Ubuntu, then Fedora)
+for f in /etc/ssl/cert.pem /etc/ssl/certs/ca-certificates.crt /etc/pki/tls/certs/ca-bundle.crt; do
+  if [ -f "$f" ]; then
+    export SSL_CERT_FILE="$f"
+    break
+  fi
+done

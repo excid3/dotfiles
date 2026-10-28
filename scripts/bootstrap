@@ -60,6 +60,8 @@ link() {
 
 link "$DOTFILES/zsh/themes/excid3.zsh-theme" "$HOME/.oh-my-zsh/themes/excid3.zsh-theme"
 link "$DOTFILES/zsh/zshrc" "$HOME/.zshrc"
+link "$DOTFILES/bash/bashrc" "$HOME/.bashrc"
+link "$DOTFILES/bash/bash_profile" "$HOME/.bash_profile"
 link "$DOTFILES/psqlrc" "$HOME/.psqlrc"
 link "$DOTFILES/gemrc" "$HOME/.gemrc"
 
